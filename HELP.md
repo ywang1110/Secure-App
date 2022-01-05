@@ -1,29 +1,39 @@
-# Getting Started
+# Info
 
-### Reference Documentation
+###  Create Spring Security Schema
+```sql
+create schema if not exists secureapp;
+use secureapp;
 
-For further reference, please consider the following sections:
+create table if not exists users(
+	username varchar(50) not null primary key,
+	password varchar(100) not null,
+	enabled boolean not null
+);
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.6.2/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.6.2/maven-plugin/reference/html/#build-image)
-* [JDBC API](https://docs.spring.io/spring-boot/docs/2.6.2/reference/htmlsingle/#boot-features-sql)
-* [Spring Configuration Processor](https://docs.spring.io/spring-boot/docs/2.6.2/reference/htmlsingle/#configuration-metadata-annotation-processor)
-* [Spring Boot DevTools](https://docs.spring.io/spring-boot/docs/2.6.2/reference/htmlsingle/#using-boot-devtools)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/2.6.2/reference/htmlsingle/#boot-features-developing-web-applications)
-* [Spring Security](https://docs.spring.io/spring-boot/docs/2.6.2/reference/htmlsingle/#boot-features-security)
+create table if not exists authorities (
+	username varchar(50) not null,
+	authority varchar(50) not null,
+	constraint fk_authorities_users foreign key(username) references users(username));
+	create unique index ix_auth_username on authorities (username,authority
+);
 
-### Guides
+insert into users (username, password, enabled) values ('plainUser', '$2a$10$KxTc8SYbIB/IaXCWz6NA4ug1pkAYM/e.P.0YQFGE3Ua4FZ6Qf842a', true);
+insert into users (username, password, enabled) values ('managerUser', '$2a$10$QPnaeWBWz1BdDglni2CLzO2YMeifVXtQDPgUOVNETTcj8cEGwqiym', true);
+insert into users (username, password, enabled) values ('adminUser', '$2a$10$Hc878CPLJ4hOtwyzt6V7..LHtzhcR3zqcXOAPseY9QGg05ZxcsTR6', true);
 
-The following guides illustrate how to use some features concretely:
-
-* [Accessing Relational Data using JDBC with Spring](https://spring.io/guides/gs/relational-data-access/)
-* [Managing Transactions](https://spring.io/guides/gs/managing-transactions/)
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
-* [Securing a Web Application](https://spring.io/guides/gs/securing-web/)
-* [Spring Boot and OAuth2](https://spring.io/guides/tutorials/spring-boot-oauth2/)
-* [Authenticating a User with LDAP](https://spring.io/guides/gs/authenticating-ldap/)
-* [Accessing data with MySQL](https://spring.io/guides/gs/accessing-data-mysql/)
-
+insert into authorities (username, authority) values ('plainUser', 'ROLE_USER');
+insert into authorities (username, authority) values ('managerUser', 'ROLE_USER');
+insert into authorities (username, authority) values ('managerUser', 'ROLE_MANAGER');
+insert into authorities (username, authority) values ('adminUser', 'ROLE_USER');
+insert into authorities (username, authority) values ('adminUser', 'ROLE_MANAGER');
+insert into authorities (username, authority) values ('adminUser', 'ROLE_ADMIN');
+```
+* Some items to note about this code:
+  * The passwords are hashed using the BCrypt library. Storing plain text passwords in a database is security risk. BCrypt is the recommended password hashing algorithm for Spring Security.
+  * The plaintext value of each password is password.
+  * We'll see how to create BCrypt hashed passwords in the next section.
+  * We have three users with the following roles:
+    * plainUser : ROLE_USER
+    * managerUser : ROLE_USER, ROLE_MANAGER
+    * adminUser : ROLE_USER, ROLE_MANAGER, ROLE_ADMIN
