@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e12eac40-3cc6-4090-b2a1-ed9498cb0487" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/boot/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/boot/util/PasswordUtility.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
@@ -43,6 +45,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager" selected="Spring Boot.SecureAppApplication (1)">
+    <configuration name="PasswordUtility" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.boot.util.PasswordUtility" />
+      <module name="Secure-App" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.boot.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SecureAppApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="Secure-App" />
       <extension name="coverage">
@@ -66,6 +81,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.SecureAppApplication (1)" />
+        <item itemvalue="Application.PasswordUtility" />
       </list>
     </recent_temporary>
   </component>
@@ -78,7 +94,7 @@
       <option name="presentableId" value="Default" />
       <updated>1641325229520</updated>
       <workItem from="1641325232072" duration="2933000" />
-      <workItem from="1641340874116" duration="1732000" />
+      <workItem from="1641340874116" duration="3671000" />
     </task>
     <servers />
   </component>

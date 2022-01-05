@@ -46,5 +46,15 @@ insert into authorities (username, authority) values ('adminUser', 'ROLE_ADMIN')
 spring.datasource.url: jdbc:mysql://localhost:3306/secureapp?useSSL=false
 spring.datasource.username: root
 spring.datasource.password: rootroot
-spring.datasource.driver-class-name: com.mysql.jdbc.Driver
+spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
 ```
+
+###  #5 Configure Authentication Manager
+Now we'll configure Spring Security to use the database for authentication and authorization data.
+Some items to note about the code:
+
+* This is a configuration class and is marked with the @Configuration annotation.
+    * This class extends `WebSecurityConfigurerAdapter`
+    * We are autowiring the data source configured in the previous step.
+    * As mentioned above, storing plain text passwords in the database is a security risk so we hash the passwords in this database using a PasswordEncoder. We have chosen to use the BCrypt password encoder for this application. This will cause Spring Security to apply the BCrypt hashing algorithm to incoming passwords before comparing them to the value in the database.
+    * We use the supplied AuthenticationManagerBuilder to configure Spring Security to use the database schema created previously. We need to supply a data source, a quey to find users by username, a query to find authorities by username, and a password encoder.
