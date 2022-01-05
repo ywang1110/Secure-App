@@ -67,3 +67,6 @@ We'll do this in five parts:
 3. Apply security rules to the endpoints.
 4. Setup the logout rules.
 5. Configure the Cross Site Request Forgery protection.
+
+###  #6 Testing in Browser and Postman
+* Don't forget to manually handle the issues caused by CSRF token
