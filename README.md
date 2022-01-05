@@ -39,3 +39,12 @@ insert into authorities (username, authority) values ('adminUser', 'ROLE_ADMIN')
     * plainUser : ROLE_USER
     * managerUser : ROLE_USER, ROLE_MANAGER
     * adminUser : ROLE_USER, ROLE_MANAGER, ROLE_ADMIN
+
+###  #4 Configure Spring Security
+##### 4.1 Configure DataBase Connection
+```xml
+spring.datasource.url: jdbc:mysql://localhost:3306/secureapp?useSSL=false
+spring.datasource.username: root
+spring.datasource.password: rootroot
+spring.datasource.driver-class-name: com.mysql.jdbc.Driver
+```
