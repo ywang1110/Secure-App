@@ -49,7 +49,7 @@ spring.datasource.password: rootroot
 spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
 ```
 
-###  #5 Configure Authentication Manager
+##### 4.2 Configure Authentication Manager
 Now we'll configure Spring Security to use the database for authentication and authorization data.
 Some items to note about the code:
 
@@ -58,3 +58,12 @@ Some items to note about the code:
     * We are autowiring the data source configured in the previous step.
     * As mentioned above, storing plain text passwords in the database is a security risk so we hash the passwords in this database using a PasswordEncoder. We have chosen to use the BCrypt password encoder for this application. This will cause Spring Security to apply the BCrypt hashing algorithm to incoming passwords before comparing them to the value in the database.
     * We use the supplied AuthenticationManagerBuilder to configure Spring Security to use the database schema created previously. We need to supply a data source, a quey to find users by username, a query to find authorities by username, and a password encoder.
+
+###  #5 Applying Spring Security to Endpoints
+Our final step is to apply Spring Security to the endpoints of our application.
+We'll do this in five parts:
+1. Enable web security.
+2. Turn on HTTP Basic (username and password) authentication.
+3. Apply security rules to the endpoints.
+4. Setup the logout rules.
+5. Configure the Cross Site Request Forgery protection.
